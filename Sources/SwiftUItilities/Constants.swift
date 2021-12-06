@@ -5,7 +5,7 @@
 //  Created by cristian on 06/12/2021.
 //
 
-import Foundation
+import SwiftUI
 
 public extension CGFloat {
     static let screenWidth = UIScreen.main.bounds.size.width

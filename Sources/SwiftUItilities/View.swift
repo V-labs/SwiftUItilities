@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+@available(iOS 13.0, *)
 public extension View {
     
     /// Returns a view with a full screen height and width.
@@ -14,6 +15,7 @@ public extension View {
         self
             .frame(width: UIScreen.main.bounds.size.width)
             .frame(height: UIScreen.main.bounds.size.height)
+            .edgesIgnoringSafeArea(.all)
     }
     
     /// Returns a view with same width and height for the specified value.
@@ -88,4 +90,26 @@ public extension View {
                 )
             )
     }
+    
+    func isHidden(_ value: Bool) -> some View {
+        modifier(HiddenModifier(isHidden: value))
+    }
+    
+    /// .overlay(alignment:, content:) is weirdly only avaialbe from iOS 15.
+    /// This method provides a fallback. Accepts a closure that returns  a View
+    func overlay<Content: View>(alignment: Alignment = .center, @ViewBuilder content: () -> Content ) -> some View {
+        self.overlay(content(), alignment: alignment)
+    }
+    
+    /// .overlay(alignment:, content:) is weirdly only avaialbe from iOS 15.
+    /// This method provides a fallback
+    func overlay<Content: View>(alignment: Alignment = .center, content: Content) -> some View {
+        self.overlay(content, alignment: alignment)
+    }
+    
+    
+    func backgroundColor(_ color: Color) -> some View {
+        self.background(color.fullScreen())
+    }
 }
+
