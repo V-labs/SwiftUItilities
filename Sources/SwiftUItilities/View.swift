@@ -34,7 +34,7 @@ public extension View {
         self.frame(width: value)
     }
     
-    func align(_ alignment: HorizontalAlignment) -> some View  {
+    func alignX(_ alignment: HorizontalAlignment) -> some View  {
         
         HStack(spacing: 0) {
             switch alignment {
@@ -54,7 +54,7 @@ public extension View {
         }
     }
     
-    func align(_ alignment: VerticalAlignment) -> some View {
+    func alignY(_ alignment: VerticalAlignment) -> some View {
         
         VStack(spacing: 0) {
             
@@ -110,6 +110,30 @@ public extension View {
     
     func backgroundColor(_ color: Color) -> some View {
         self.background(color.fullScreen())
+    }
+    
+    func top(_ value: CGFloat) -> some View {
+        self.padding(.top, value)
+    }
+    
+    func bottom(_ value: CGFloat) -> some View {
+        self.padding(.bottom, value)
+    }
+    
+    func leading(_ value: CGFloat) -> some View {
+        self.padding(.leading, value)
+    }
+    
+    func trailing(_ value: CGFloat) -> some View {
+        self.padding(.trailing, value)
+    }
+    
+    func vertical(_ value: CGFloat) -> some View {
+        self.padding(.vertical, value)
+    }
+    
+    func horizontal(_ value: CGFloat) -> some View {
+        self.padding(.horizontal, value)
     }
 }
 
