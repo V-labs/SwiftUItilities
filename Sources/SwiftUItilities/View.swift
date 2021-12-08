@@ -135,5 +135,19 @@ public extension View {
     func horizontal(_ value: CGFloat) -> some View {
         self.padding(.horizontal, value)
     }
+    
+    @ViewBuilder
+    func spaceWrap() -> some View {
+        Spacer()
+        self
+        Spacer()
+    }
+    
+    func scrollViewlize(axis: Axis.Set = .vertical) -> some View {
+        
+        ScrollView(axis, showsIndicators: false) {
+            self
+        }
+    }
 }
 
