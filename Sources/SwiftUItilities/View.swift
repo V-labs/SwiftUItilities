@@ -143,7 +143,16 @@ public extension View {
         Spacer()
     }
     
+    
+    // @todo: Delete
     func scrollViewlize(axis: Axis.Set = .vertical) -> some View {
+        
+        ScrollView(axis, showsIndicators: false) {
+            self
+        }
+    }
+    
+    func scrollify(_ axis: Axis.Set = .vertical) -> some View {
         
         ScrollView(axis, showsIndicators: false) {
             self
