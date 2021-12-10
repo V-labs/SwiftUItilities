@@ -95,6 +95,8 @@ public extension View {
         modifier(HiddenModifier(isHidden: value))
     }
     
+    
+    /// @todo: Delete overlay methods ecause they conflict with native method
     /// .overlay(alignment:, content:) is weirdly only avaialbe from iOS 15.
     /// This method provides a fallback. Accepts a closure that returns  a View
     func overlay<Content: View>(alignment: Alignment = .center, @ViewBuilder content: () -> Content ) -> some View {
@@ -107,6 +109,17 @@ public extension View {
         self.overlay(content, alignment: alignment)
     }
     
+    
+    func overlayView<Content: View>(alignment: Alignment = .center, @ViewBuilder content: () -> Content ) -> some View {
+        self.overlay(content(), alignment: alignment)
+    }
+    
+    /// .overlay(alignment:, content:) is weirdly only avaialbe from iOS 15.
+    /// This method provides a fallback
+    func overlayView<Content: View>(alignment: Alignment = .center, content: Content) -> some View {
+        self.overlay(content, alignment: alignment)
+    }
+
     
     func backgroundColor(_ color: Color) -> some View {
         self.background(color.fullScreen())
