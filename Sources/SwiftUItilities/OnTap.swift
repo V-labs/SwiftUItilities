@@ -26,6 +26,25 @@ public extension View {
         }
     }
     
+    func onTap<Destination: View>(
+        toggle isActive: Binding<Bool>,
+        navigateTo destination: Destination,
+        callback: (() -> ())? = nil
+    ) -> some View {
+        self.modifier(
+            OnTapToggleNavigationLink(
+                isActive: isActive,
+                destination: destination,
+                callback: callback
+            )
+        )
+    }
+
+    
+    func wrapInNavigation() -> some View {
+        NavigationView { self }
+    }
+    
     /// Wraps the view around a Button View
     /// Use insted of native .onTapGesture to keep
     /// visual feedback (opacity transition on tap)
@@ -35,5 +54,23 @@ public extension View {
         } label: {
             self
         }
+    }
+}
+
+public struct OnTapToggleNavigationLink<Destination: View>: ViewModifier {
+    
+    @Binding var isActive: Bool
+    let destination: Destination
+    let callback: (() -> ())?
+    
+    func body(content: Content) -> some View {
+        content
+            .onTap {
+                if let safeCallback = callback {
+                    safeCallback()
+                }
+                isActive = true
+            }
+            .navigationLink(destination, $isActive)
     }
 }
