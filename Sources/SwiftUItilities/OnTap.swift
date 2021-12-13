@@ -63,7 +63,7 @@ public struct OnTapToggleNavigationLink<Destination: View>: ViewModifier {
     let destination: Destination
     let callback: (() -> ())?
     
-    func body(content: Content) -> some View {
+    public func body(content: Content) -> some View {
         content
             .onTap {
                 if let safeCallback = callback {
