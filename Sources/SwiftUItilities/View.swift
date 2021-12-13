@@ -82,6 +82,12 @@ public extension View {
         }
     }
     
+    func onTap<Destination: View>(navigateTo destination: () -> Destination) -> some View {
+        NavigationLink(destination: destination()) {
+            self
+        }
+    }
+    
     
     /// Hidden navigation link.
     /// Pass the destination view as first parametter
