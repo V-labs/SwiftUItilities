@@ -10,7 +10,8 @@ import SwiftUI
 @available(iOS 13.0, *)
 public extension View {
     
-    /// Returns a view with a full screen height and width.
+    /// Returns a view taking the whole screen width & height available.
+    /// Ignores safe area
     func fullScreen() -> some View {
         self
             .frame(width: UIScreen.main.bounds.size.width)
