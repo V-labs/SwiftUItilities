@@ -88,6 +88,18 @@ public extension View {
         }
     }
     
+    /// Wraps the view around a Button View
+    /// making it tappable.
+    /// Use insted of native .onTapGesture to keep
+    /// visual feedback (opacity transition on tap)
+    func onTap(perform: @escaping () -> ()) -> some View {
+        Button {
+            perform()
+        } label: {
+            self
+        }
+    }
+    
     
     /// Hidden navigation link.
     /// Pass the destination view as first parametter
@@ -176,5 +188,79 @@ public extension View {
             self
         }
     }
+    
+    
+    /// Injects view inside an overlay modifer applied to a Spacer().
+    /// Use when you need an Hstack with three elements and need to have
+    /// one of them at the center. Apply to the other two
+    func injectInSpacer() -> some View {
+        Spacer()
+            .overlay(self)
+    }
+    
+    
+    func showDebugGuidelines(color: Color = .blue, thickness: CGFloat = 1) -> some View {
+        self
+            .showPerimeter()
+            .showAxis(color: color, thickness: thickness)
+    }
+    
+    func showPerimeter(color: Color = .blue, thickness: CGFloat = 1) -> some View {
+        self.border(color, width: thickness)
+    }
+    
+    @ViewBuilder
+    func showAxis(
+        _ axis: Axis.Set? = nil,
+        color: Color = .blue,
+        thickness: CGFloat = 1
+    ) -> some View {
+        
+        switch axis {
+        case .some(.horizontal):
+            self.showHorizontalAxis(color: color, thickness: thickness)
+        case .some(.vertical):
+            self.showVerticalAxis(color: color, thickness: thickness)
+        case .none:
+            self
+                .showVerticalAxis(color: color, thickness: thickness)
+                .showHorizontalAxis(color: color, thickness: thickness)
+        default: EmptyView()
+        }
+    }
+    
+    func showHorizontalAxis(color: Color = .blue, thickness: CGFloat = 1) -> some View {
+        
+        self
+            .overlay(
+                Rectangle()
+                    .foregroundColor(color)
+                    .height(thickness)
+                    .frame(maxWidth: .infinity)
+            )
+        
+    }
+    
+    func showVerticalAxis(color: Color = .blue, thickness: CGFloat = 1) -> some View {
+        self
+            .overlay(
+                Rectangle()
+                    .foregroundColor(color)
+                    .width(thickness)
+                    .frame(maxHeight: .infinity)
+            )
+    }
+    
+    @ViewBuilder
+    func displayIf(_ condition: Bool) -> some View {
+        
+        if condition {
+            self
+        } else {
+            EmptyView()
+        }
+    }
+    
+    
 }
 
