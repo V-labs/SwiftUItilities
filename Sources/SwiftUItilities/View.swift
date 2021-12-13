@@ -75,6 +75,14 @@ public extension View {
         }
     }
     
+    /// Navigate to view
+    func onTap<Destination: View>(navigateTo destination: Destination) -> some View {
+        NavigationLink(destination: destination) {
+            self
+        }
+    }
+    
+    
     /// Hidden navigation link.
     /// Pass the destination view as first parametter
     /// and a binding bool
@@ -154,15 +162,6 @@ public extension View {
         Spacer()
         self
         Spacer()
-    }
-    
-    
-    // @todo: Delete
-    func scrollViewlize(axis: Axis.Set = .vertical) -> some View {
-        
-        ScrollView(axis, showsIndicators: false) {
-            self
-        }
     }
     
     func scrollify(_ axis: Axis.Set = .vertical) -> some View {
