@@ -10,7 +10,11 @@ import SwiftUI
 @available(iOS 13.0, *)
 public extension View {
     
-    
+    func hideNavigationBar() {
+        self
+            .navigationBarTitle("")
+            .navigationBarHidden(true)
+    }
     
     /// Hidden navigation link.
     /// Pass the destination view as first parametter
